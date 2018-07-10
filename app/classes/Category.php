@@ -7,6 +7,7 @@
  */
 
 namespace App\classes;
+
 use App\classes\Database;
 
 class Category
@@ -23,33 +24,68 @@ class Category
         if (mysqli_query($link, $sql)) {
             $message = "Category Info Save Successfully";
             return $message;
-        }else{
+        } else {
             die('Query Problem: ' . mysqli_error($link));
         }
 
     }
 
 
-    public function getAllCategoryInfo(){
+    public function getAllCategoryInfo()
+    {
         $link = Database::dbConnection();
         $sql = "SELECT * FROM categories";
-        if(mysqli_query($link,$sql)){
-            $queryResult = mysqli_query($link,$sql);
+        if (mysqli_query($link, $sql)) {
+            $queryResult = mysqli_query($link, $sql);
             return $queryResult;
-        }else{
-            die('Query Problem: '. mysqli_error($link));
+        } else {
+            die('Query Problem: ' . mysqli_error($link));
         }
     }
 
-    public function getCategoryInfoById($categoryId){
+    public function getCategoryInfoById($categoryId)
+    {
         $link = Database::dbConnection();
         $sql = "SELECT * FROM categories WHERE id = '$categoryId'";
-        if(mysqli_query($link,$sql)){
-            $queryResult = mysqli_query($link,$sql);
+        if (mysqli_query($link, $sql)) {
+            $queryResult = mysqli_query($link, $sql);
             return mysqli_fetch_assoc($queryResult);
-        }else{
-            die('Query Problem: '. mysqli_error($link));
+        } else {
+            die('Query Problem: ' . mysqli_error($link));
         }
+
+    }
+
+    public function updateCategoryInfoById($data)
+    {
+        $link = Database::dbConnection();
+        $categoryName = $data['category_name'];
+        $categoryDescription = $data['category_description'];
+        $publicationStatus = $data['status'];
+        $categoryId = $data['category_id'];
+        $sql = "UPDATE categories SET category_name = '$categoryName', category_description = '$categoryDescription', publication_status = '$publicationStatus' WHERE id = '$categoryId'";
+
+        if (mysqli_query($link, $sql)) {
+            header('Location: manage-category.php');
+        } else {
+
+            die('Query Problem: ' . mysqli_error($link));
+        }
+
+
+    }
+
+    public function deleteCategoryInfoById($id){
+        $link = Database::dbConnection();
+        $sql = "DELETE FROM categories WHERE id = '$id'";
+
+        if(mysqli_query($link,$sql)){
+            header('Location: manage-category.php');
+        }else{
+            die('Query Problem: ' . mysqli_error($link));
+        }
+
+
 
     }
 

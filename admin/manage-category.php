@@ -14,6 +14,11 @@ if (isset($_GET['logout'])) {
     $login->adminLogout();
 }
 
+if(isset($_GET['delete'])){
+    $categoryId = $_GET['id'];
+    $category -> deleteCategoryInfoById($categoryId);
+}
+
 $queryResult = $category->getAllCategoryInfo();
 
 
@@ -52,7 +57,7 @@ $queryResult = $category->getAllCategoryInfo();
                         <td width="15%"><?php echo $category['publication_status'] == 1 ? 'published' : 'Unpublished' ?></td>
                         <td width="10%">
                             <a href="edit-category.php?id=<?php echo $category['id']?>">Edit</a>
-                            <a href="#">Delete</a>
+                            <a href="?delete=true&id=<?php echo $category['id']?>">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>

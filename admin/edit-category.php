@@ -37,11 +37,12 @@ $result = $category->getCategoryInfoById($categoryId);
                 <div class="card-body">
                     <h3 class="text-center" style="color: green"><?php echo $message ?></h3>
 
-                    <form action="" method="post">
+                    <form action="" method="post" id="editForm">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Category Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="category_name" value="<?php echo $result['category_name']?>">
+                                <input type="hidden" class="form-control" name="category_id" value="<?php echo $result['id']?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -54,8 +55,8 @@ $result = $category->getCategoryInfoById($categoryId);
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Publication Status</label>
                             <div class="col-sm-9">
-                                <input type="radio" name="status" value="0"/>Unpublished
-                                <input type="radio" name="status" value="1"/>Published
+                                <input type="radio" name="status" value="1" <?php if($result['publication_status'] == 1){echo 'checked';}?>/>Published
+                                <input type="radio" name="status" value="0" <?php if($result['publication_status'] == 0){echo 'checked';}?>/>Unpublished
                             </div>
                         </div>
 
@@ -76,5 +77,6 @@ $result = $category->getCategoryInfoById($categoryId);
 <script src="../assets/jquery/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
+
 </body>
 </html>
