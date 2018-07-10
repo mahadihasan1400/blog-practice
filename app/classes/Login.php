@@ -39,4 +39,9 @@ class Login
 
 
     }
+
+    public function adminLogout()
+    {
+        header('Location: index.php');
+    }
 }
