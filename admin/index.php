@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(isset($_SESSION['id'])){
+    header('Location: dashboard.php');
+}
+
 require_once '../vendor/autoload.php';
 $login = new \App\classes\Login();
 

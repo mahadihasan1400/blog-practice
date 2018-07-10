@@ -20,8 +20,7 @@ class Database
         $password = "";
         $dbName = "blog_practice";
 
-        $link = mysqli_connect($hostName, $userName, $password, $dbName);
-        return $link;
+        return mysqli_connect($hostName, $userName, $password, $dbName);
 
     }
 
